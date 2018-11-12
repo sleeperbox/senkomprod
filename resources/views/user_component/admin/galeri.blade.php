@@ -147,18 +147,20 @@
                         <div class='list-group gallery'>
                           @if($galeris->count())
                           @foreach($galeris as $image)
-                          <div class="col-md-4 col-xl-3 col-lg-3 col-xs-12">
-                                <div class="shadow p-3 mb-5 rounded" style="background:white">
+                          <div class="col-md-6 col-xl-3 col-lg-3 col-xs-12">
+                            <div class="shadow p-3 mb-5 rounded" style="background:white">
                               <a class="thumbnail" rel="ligthbox" href="public/images/{{ $image->image }}">
                                 <img class="img-responsive" style="height:300px;width:720px" alt="" src="public/images/{{ $image->image }}" />
-                            </a>
-                                <h5 style="text-align:center">Deskripsi</h5>
+                                </a>
+                               
+                                <p style="color:black;margin-bottom:5px;padding:10px;height:100px">{{$image->title}}</p> 
+                                
                                 <hr/>
-                                <p style="color:black;margin-bottom:5px;padding:10px;height:100px">{{$image->title}}</p>    
                               <a href="{{ url('/galeri/set1',$image->id) }}" class="btn btn-block" style="text-align:center" id="set1" >Set Ke Slider 1</a>
                                 <a href="{{ url('/galeri/set2',$image->id) }}" class="btn btn-block" style="text-align:center" id="set2" >Set Ke Slider 2</a>
+                                
                             </div>
-                              <form action="{{ url('galeri',$image->image) }}" method="POST">
+                              <form action="{{ url('galeri',$image->id) }}" method="POST">
                                   <input type="hidden" name="_method" value="delete">
                                           {!! csrf_field() !!}
                                   <button type="submit" class="close-icon btn-fill btn btn-danger" onclick="return confirm('Yakin ingin menghapus data?')"><i class="ti-close"></i></button>
@@ -166,6 +168,28 @@
                           </div>
                           @endforeach
                           @endif
+                        </div>
+<br/>
+<hr/>
+<br/>
+                        <div class='list-group gallery'>
+                            @if($videos->count())
+                            @foreach($videos as $get)
+                            <div class="col-md-6 col-xl-4 col-lg-6 col-xs-12">
+                                    <div class="shadow p-3 mb-5 rounded" style="background:white">
+                                <iframe height="100%" width="100%" src="{{url($get->videolink)}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                          
+                                <p style="color:black;margin-bottom:5px;padding:10px;height:100px">{{$get->title}}</p>
+                                <hr/>
+                                <form action="{{ url('galerivideo',$get->id) }}" method="POST">
+                                    <input type="hidden" name="_method" value="delete">
+                                            {!! csrf_field() !!}
+                                    <button type="submit" class="close-icon btn-fill btn btn-danger" onclick="return confirm('Yakin ingin menghapus data?')"><i class="ti-close"></i></button>
+                                </form>
+                            </div>
+                            </div>
+                            @endforeach
+                            @endif
                         </div>
                       
                   
