@@ -433,7 +433,7 @@ Footer
     $(document).ready(function() {
       setInterval(function () {
         $('#showsms').load('{{ url('/telegramphoto') }}')
-      }, 5000);
+      }, 1000);
     });   
 </script>
 <style>
