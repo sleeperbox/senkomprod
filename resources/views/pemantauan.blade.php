@@ -2,6 +2,7 @@
 <html>
     <head>
         @include('template.head_home')
+         <link rel="stylesheet" href="{{url('https://www.w3schools.com/w3css/4/w3.css')}}">
     </head>
     <body>
   <header id="header" style="background: #222; opacity:0.8">
@@ -46,64 +47,48 @@
                     <!-- slider -->
 
                             <div class="col-lg-12 col-md-6 col-xs-6">
-                            <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
-                                    <div class="carousel-inner">
-                                      <div class="carousel-item active">
-                                          <!-- foreach galeri disini 3 gambar -->
-                                        @foreach($photo as $poto)
+                              <div class="w3-content w3-display-container" style="max-width:700px">
+                              @foreach($photo as $poto)
                                           <?php 
                                             if($poto->slider1 == "tampil"){
                                           ?>
-                                        <img class="d-block w-100" src="public/images/{{ $poto->image }}"" alt="First slide">
-                                        <div class="carousel-caption d-none d-md-block">
-                                                <h5>{{ $poto->title }}</h5>
-                                              </div>
-                                          <!-- end foreach galeri -->
-                                            <?php } ?>
-                                      </div>
-                                        @endforeach
-                                    </div>
-                                    <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
-                                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                      <span class="sr-only">Previous</span>
-                                    </a>
-                                    <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
-                                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                      <span class="sr-only">Next</span>
-                                    </a>
-                                  </div>
+
+                                <img class="mySlides" src="public/images/{{ $poto->image }}" style="width:100%">
+                               
+                                <div class="w3-center w3-container w3-section w3-large w3-text-white w3-display-bottommiddle" style="width:100%; display: none">
+                                    <div class="w3-left w3-hover-text-khaki" onclick="plusDivs(-1)">&#10094;</div>
+                                    <div class="w3-right w3-hover-text-khaki" onclick="plusDivs(1)">&#10095;</div>
+                                    <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(1)"></span>
+                                    <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(2)"></span>
+                                    <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(3)"></span>
+                                </div>
+                                 <?php } ?>
+                                 @endforeach
                             </div>
+                          </div>
                             <!-- slider 1 end -->
                             <br/>
                             <!-- slider 2 start -->
-                            <div class="col-lg-12 col-md-6 col-xs-6">
-                            <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
-                                    <div class="carousel-inner">
-                                      <div class="carousel-item active">
-                                          <!-- foreach galeri disini 3 gambar -->
-                                          @foreach($photo as $poto)
+                          <div class="col-lg-12 col-md-6 col-xs-6">
+                          
+                            <div class="slideshow_wrapper" style="max-width:700px">
+                              <div class="slideshow">
+                                  @foreach($photo as $poto)
                                           <?php 
                                             if($poto->slider2 == "tampil"){
                                           ?>
-                                        <img class="d-block w-100" src="public/images/{{ $poto->image }}" alt="First slide">
-                                        <div class="carousel-caption d-none d-md-block">
-                                                <h5>{{ $poto->title }}</h5>
-                                              </div>  
-                                        <!-- end foreach galeri -->
-                                            <?php } ?>
-                                      </div>
-                                        @endforeach
-                                    </div>
-                                    <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
-                                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                      <span class="sr-only">Previous</span>
-                                    </a>
-                                    <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
-                                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                      <span class="sr-only">Next</span>
-                                    </a>
-                                  </div>
+                                <div class="slide_one slide">
+                                  <img src="public/images/{{ $poto->image }}" style="width:100%">
+                                </div>
+                                
+                               <?php } ?>
+                                 @endforeach
+                                 
+                              </div>
                             </div>
+                          </div>
+
+                      </div>
                             <!-- slider 2 end -->
                             
                     <!-- slider end-->
@@ -187,7 +172,6 @@ Footer
   <!-- Template Main Javascript File -->
   <script src="{{url('public/web/js/main.js')}}"></script>
 
-
 <script type="text/javascript">
 
   function show(){
@@ -203,6 +187,49 @@ Footer
         $('#show').load('{{ url('/data') }}')
       }, 500);
     });
+
+var slideIndex = 1;
+showDivs(slideIndex);
+
+function plusDivs(n) {
+  showDivs(slideIndex += n);
+}
+
+function currentDiv(n) {
+  showDivs(slideIndex = n);
+}
+
+function showDivs(n) {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("demo");
+  if (n > x.length) {slideIndex = 1}    
+  if (n < 1) {slideIndex = x.length}
+  for (i = 0; i < x.length; i++) {
+     x[i].style.display = "none";  
+  }
+  for (i = 0; i < dots.length; i++) {
+     dots[i].className = dots[i].className.replace(" w3-white", "");
+  }
+  x[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].className += " w3-white";
+}
+
+var myIndex = 0;
+carousel();
+
+function carousel() {
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";  
+    }
+    myIndex++;
+    if (myIndex > x.length) {myIndex = 1}    
+    x[myIndex-1].style.display = "block";  
+    setTimeout(carousel, 2500);    
+}
+
 </script>
 
 <style>
@@ -212,6 +239,63 @@ Footer
     padding: 60px 0 40px 0;
     position: relative;
     }
+
+.mySlides {display:none}
+.w3-left, .w3-right, .w3-badge {cursor:pointer}
+.w3-badge {height:13px;width:13px;padding:0}
+
+
+ 
+.slideshow_wrapper {
+  width:285px;
+  height:260px;
+  overflow: hidden;
+   
+}
+ 
+.slideshow {
+  width:1500px;
+  height:280px;
+  margin: 0 0 0 -1000px;
+ position: relative;
+  -webkit-animation-name: slide_animation;
+  -webkit-animation-duration:3s;
+  -webkit-animation-iteration-count:infinite;
+  -webkit-animation-direction:alternate;
+   -webkit-animation-play-state: running;
+}
+ 
+.slide {
+  
+  width:500px;
+  height: 270px;
+  position:relative;
+  float:left;
+  overflow:hidden;
+  
+}
+ 
+.slideshow img{
+  width:270px; height:270px;
+}
+ 
+@-webkit-keyframes slide_animation {
+  
+  0% {left:0px;}
+  10% {left:500px;}
+  20% {left:500px;}
+  30% {left:500px;}
+  40% {left:500px;}
+  50% {left:500px;}
+  60% {left:500px;}
+  70% {left:1000px;}
+  80% {left:1000px;}
+  90% {left:1000px;}
+  100% {left:1000px;}
+  
+  
+}
+
 </style>
 </body>
 </html>

@@ -34,9 +34,10 @@
                                 <h4 class="title">Input Berita</h4>
                             </div>
                             <div class="content">
-                                <form action="{{url('/berita')}}" method="post" role="form">
+                                <form action="{{url('/berita/apk')}}" method="post" role="form">
                                 {{ csrf_field() }}
                                 <?php
+                                date_default_timezone_set("Asia/jakarta");
                                   $tgl = date('Y-m-d');
                                   $Jam = date('h:s a');
                                   $tanggal = $tgl;

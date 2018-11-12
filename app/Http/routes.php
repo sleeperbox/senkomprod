@@ -68,6 +68,7 @@ Route::get('/berita/shownhide/{id}', 'AdminController@showhide_berita');
 Route::get('/telegram', 'AdminController@telegram');
 Route::get('/telegramphoto', 'AdminController@telegram_poto');
 Route::get('/sms', 'AdminController@sms');
+Route::post('/berita/apk', 'BeritaController@berita_apk');
 
 //User Controller
 Route::get('/user', 'UserController@user');
