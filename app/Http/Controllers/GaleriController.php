@@ -90,20 +90,21 @@ class GaleriController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($image)
+    public function destroy($id)
     {
-    	Galeri::where('image',$image)->delete();
+    $id = Galeri::where('id',$id)->first();
+    $namafoto = $id->image;
+
 	$tempat = 'public/images'; 
-	unlink($tempat.'/'.$image);
+	unlink($tempat.'/'.$namafoto);
         
     	return back()
     		->with('success','Gambar Berhasil di Hapus.');	
     }
-    public function destroy_video($videolink)
+    public function destroy_video($id)
     {
-    	Galerivideos::where('videolink',$videolink)->delete();
-        
+    	Galerivideos::where('id',$id)->delete();
     	return back()
-    		->with('success-video','Berhasil di Hapus.');	
+    		->with('success-video', 'Berhasil di Hapus.');	
     }
 }
