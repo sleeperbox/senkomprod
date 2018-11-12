@@ -266,7 +266,9 @@ class AdminController extends Controller
                 $data->status_tampil = "tampil";
                 $data->status_pemantauan = "tidak tampil";
                 $data->save();
-                Session::flush();
+                session()->forget('telegram');
+                session()->forget('poto');
+                session()->forget('id');
 
                 Telegram::sendMessage([
                     'chat_id' => $chat_id, 
@@ -283,7 +285,6 @@ class AdminController extends Controller
                 $data->status_tampil = "tampil";
                 $data->status_pemantauan = "tidak tampil";
                 $data->save();
-                Session::flush();
 
                 Telegram::sendMessage([
                     'chat_id' => $chat_id, 
@@ -318,13 +319,12 @@ class AdminController extends Controller
         $lokasi_foto = $data_foto['result']['file_path'];
         $foto = substr($lokasi_foto, -3);
 
-        if(Session::get('telegram')){
+        if($foto == null){
             
         }else{
             Session::put('poto',$lokasi_foto);
             Session::put('id',$chat_id);
             Session::put('telegram',TRUE);
-     
         }
 }
 public function sms(){	

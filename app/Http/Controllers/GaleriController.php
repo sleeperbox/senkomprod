@@ -80,7 +80,7 @@ class GaleriController extends Controller
         $input['title'] = $request->title;
         Galerivideos::create($input);
 		return back()
-    		->with('success-video','berhasil di upload');
+    		->with('video','Video Berhasil di masukan');
             	
     }
 
