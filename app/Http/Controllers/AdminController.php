@@ -228,7 +228,6 @@ class AdminController extends Controller
     }
    public function telegram(){
          $token = "754684341:AAHYXDAYaOQVYVC66LXGWjf3TR1gatCDwIc";
-        $bot = "sleeperboxrev1";
         $telegram_api = "https://api.telegram.org/bot".$token."/getupdates";
 
         $json = file_get_contents($telegram_api);
@@ -272,7 +271,7 @@ class AdminController extends Controller
 
                 Telegram::sendMessage([
                     'chat_id' => $chat_id, 
-                    'text' => "Berita berhasil di input",
+                    'text' => "Berita dan poto berhasil di input",
                     'parse_mode' => 'HTML'
                 ]);
             }else{
@@ -298,7 +297,6 @@ class AdminController extends Controller
     }
     public function telegram_poto(){
         $token = "754684341:AAHYXDAYaOQVYVC66LXGWjf3TR1gatCDwIc";
-        $bot = "sleeperboxrev1";
         $telegram_api = "https://api.telegram.org/bot".$token."/getupdates";
 
         $json = file_get_contents($telegram_api);
