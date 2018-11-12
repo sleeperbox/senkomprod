@@ -34,7 +34,7 @@ check branch yang ada:
 git branch
 
 pindah ke branch yang akan anda kerjakan:
-git checkout namabranch
+git checkout -b namabranch
 
 cek apakah sudah di sub branch yang akan anda kerjakan:
 git branch
