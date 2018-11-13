@@ -65,9 +65,9 @@ class GaleriController extends Controller
 
         $input['image'] = time().'.'.$request->image->getClientOriginalExtension();
         $request->image->move(public_path('images'), $input['image']);
-	$input['title'] = $request->title;
-	Galeri::create($input);		
-	return back()
+	    $input['title'] = $request->title;
+	    Galeri::create($input);		
+	    return back()
     		->with('success','berhasil di upload');
         }
 	public function upload_vid(Request $request)
