@@ -112,25 +112,36 @@ Contact Section
       <!-- tengah -->
       <div class="col-md-6 wow fadeInUp">
        {{ csrf_field() }}
+      @foreach($data as $datas)
       <?php
       date_default_timezone_set("Asia/jakarta");
           $tgl = date('Y-m-d');
           $Jam = date('h:s a');
           $tanggal = $tgl;
+          $tgl_berita = $datas->tgl;
           $jam = $Jam;
         ?>
+        @endforeach
           <table class="table table-striped w-auto">
    <!--Table body-->
       <tr>
         <th>BERITA</th>
         <th style="scoped">
         </th>
+        
         <th>
-        <input type="date" class="btn" name="tgl"
-         value="<?php echo $tanggal; ?>" max="2018-12-31" />
-         <button type="button" class="btn btn-warning">filter</button>
+        <form action="{{url('/databerita')}}" method="post" >
+          {{ csrf_field() }}
+            <input type="date" class="btn" name="tgl" value="<?php echo $tanggal ?>" max="2018-12-31" />
+            <button type="submit" class="btn btn-warning">filter</button>
+       </form>
         </th>
       </tr>
+      @if(\Session::has('berita'))
+          <div class="alert alert-danger">
+            <div>{{ Session::get('berita')}}</div>
+          </div>
+        @endif
       <tr>
         <td style="width:60%">
           <p id="showdata"></p>
@@ -412,12 +423,12 @@ Footer
 <script>
   $(document).ready(function() {
       setInterval(function () {
-        $('#showdata').load('{{ url('/databerita') }}')
+        $('#showdata').load('{{ url('/databerita',$tgl_berita) }}')
       }, 1000);
     });
     $(document).ready(function() {
       setInterval(function () {
-        $('#showdatajam').load('{{ url('/databeritajam') }}')
+        $('#showdatajam').load('{{ url('/databeritajam',$tgl_berita) }}')
       }, 1000);
     });
     $(document).ready(function() {

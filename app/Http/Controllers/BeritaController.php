@@ -23,24 +23,35 @@ class BeritaController extends Controller
         }
 	    $tgl = date('Y-m-d');
         $tanggal = $tgl;
-        $data = Berita::where('tgl',$tanggal)->where('status_tampil',"tampil")->paginate(5);
+        $data = Berita::where('tgl',$tanggal)->get();
         $galeris = Galeri::orderBy('created_at', 'asc')->take(10)->get();
 		return view('home_component.index', compact('data', 'galeris'));
     }
-
-    public function loadberita()
+    public function berita(Request $request)
     {
-        $tgl = date('Y-m-d');
-        $tanggal = $tgl;
-            $datas = Berita::orderBy('id', 'dsc')->where('tgl',$tanggal)->paginate(5);
+        $tanggal = $request->tgl;
+        $data = Berita::where('tgl',$tanggal)->get();
+        $galeris = Galeri::orderBy('created_at', 'asc')->take(10)->get();
+        if(count($data) == 0){ 
+            Session::flash('berita', $tanggal." ".'Tidak ada Berita');
+            Session::flash('tgl', $tanggal);
+            return redirect('/');
+        }else{
+            return view('home_component.index', compact('data', 'galeris'));
+        }
+    }
+
+    public function loadberita(Request $request)
+    {
+        $tgl = $request->tgl_berita;
+            $datas = Berita::orderBy('id', 'dsc')->where('tgl',$tgl)->paginate(5);
             return view('data_berita', compact('datas'));
     }
 
-    public function loadberitajam()
+    public function loadberitajam(Request $request)
     {
-        $tgl = date('Y-m-d');
-        $tanggal = $tgl;
-            $datas = Berita::orderBy('id', 'dsc')->where('tgl',$tanggal)->paginate(5);
+        $tgl = $request->tgl_berita;
+            $datas = Berita::orderBy('id', 'dsc')->where('tgl',$tgl)->paginate(5);
             return view('data_beritajam', compact('datas'));
     }
 
