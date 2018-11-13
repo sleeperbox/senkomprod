@@ -41,6 +41,9 @@
                   </div>
                   @endif
                   <!-- table feed --> 
+                  <?php
+                    $token = "754684341:AAHYXDAYaOQVYVC66LXGWjf3TR1gatCDwIc";
+                  ?>
                   <form action="{{ url('/admin/berita') }}" method="post">
                     {{ csrf_field() }}
                     <?php
@@ -61,11 +64,20 @@
 
                   <div class="row">
                     @foreach($data_berita as $datas)
+                    <?php $poto = "https://api.telegram.org/file/bot".$token."/".$datas->photo;
+                          $photo = $datas->photo;
+                     ?>
                     <div class="col-lg-6 col-sm-6">
                       <div class="card">
                         <div class="col-xs-5">
                         </div>
                         <div class="content">
+                          @if($photo == "")
+                            
+                          @endif
+                          @if($photo != "")
+                            <img src="<?php echo $poto ?>" id="photo"/>
+                          @endif
                           <p>{{$datas->callsign}} - {{$datas->tlp}} - {{$datas->jam}}<br/>
                           {{$datas->pesan}}
                           

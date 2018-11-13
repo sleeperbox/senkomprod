@@ -228,7 +228,6 @@ class AdminController extends Controller
     }
    public function telegram(){
          $token = "754684341:AAHYXDAYaOQVYVC66LXGWjf3TR1gatCDwIc";
-        $bot = "sleeperboxrev1";
         $telegram_api = "https://api.telegram.org/bot".$token."/getupdates";
 
         $json = file_get_contents($telegram_api);
@@ -253,7 +252,7 @@ class AdminController extends Controller
 
         $data = Berita::where('callsign',$callsign)->first();
         if(count($data) == 0){  
-            if(Session::get('telegram')){
+            if(Session::get('poto')){
                 $lokasi_foto = Session::get('poto');
             
                 $data = new Berita();
@@ -266,13 +265,12 @@ class AdminController extends Controller
                 $data->status_tampil = "tampil";
                 $data->status_pemantauan = "tidak tampil";
                 $data->save();
-                session()->forget('telegram');
-                session()->forget('poto');
-                session()->forget('id');
+                Session::forget('poto');
+                Session::forget('id');
 
                 Telegram::sendMessage([
                     'chat_id' => $chat_id, 
-                    'text' => "Berita berhasil di input",
+                    'text' => "Berita dan poto berhasil di input",
                     'parse_mode' => 'HTML'
                 ]);
             }else{
@@ -298,7 +296,6 @@ class AdminController extends Controller
     }
     public function telegram_poto(){
         $token = "754684341:AAHYXDAYaOQVYVC66LXGWjf3TR1gatCDwIc";
-        $bot = "sleeperboxrev1";
         $telegram_api = "https://api.telegram.org/bot".$token."/getupdates";
 
         $json = file_get_contents($telegram_api);
@@ -324,7 +321,6 @@ class AdminController extends Controller
         }else{
             Session::put('poto',$lokasi_foto);
             Session::put('id',$chat_id);
-            Session::put('telegram',TRUE);
         }
 }
 public function sms(){	
