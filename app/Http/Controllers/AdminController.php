@@ -252,7 +252,7 @@ class AdminController extends Controller
 
         $data = Berita::where('callsign',$callsign)->first();
         if(count($data) == 0){  
-            if(Session::get('telegram')){
+            if(Session::get('poto')){
                 $lokasi_foto = Session::get('poto');
             
                 $data = new Berita();
@@ -265,9 +265,8 @@ class AdminController extends Controller
                 $data->status_tampil = "tampil";
                 $data->status_pemantauan = "tidak tampil";
                 $data->save();
-                session()->forget('telegram');
-                session()->forget('poto');
-                session()->forget('id');
+                Session::forget('poto');
+                Session::forget('id');
 
                 Telegram::sendMessage([
                     'chat_id' => $chat_id, 
@@ -322,7 +321,6 @@ class AdminController extends Controller
         }else{
             Session::put('poto',$lokasi_foto);
             Session::put('id',$chat_id);
-            Session::put('telegram',TRUE);
         }
 }
 public function sms(){	
