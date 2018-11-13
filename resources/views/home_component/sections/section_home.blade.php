@@ -290,7 +290,6 @@ Portfolio Section
         @foreach($galeris as $image)
       <div class="col-lg-4 col-md-6 portfolio-item filter-app wow fadeInUp" data-wow-delay="0.2s">
           <div class="portfolio-wrap">
-              
               <figure>
                 <img src="public/images/{{ $image->image }}" class="img-fluid" alt="">
                 <a href="public/images/{{ $image->image }}" class="link-preview" data-lightbox="portfolio" data-title="App 2" title="Preview"><i class="ion ion-eye"></i></a>
@@ -301,11 +300,23 @@ Portfolio Section
                 <p>{{$image->title}}</p>
               </div>
             </div>
+
            
               
       </div> @endforeach
+      @foreach($videos as $get)
+      <div class="col-lg-4 col-md-6 portfolio-item filter-card wow fadeInUp">
+        <div class="portfolio-wrap">
+          <figure>
+            <iframe width="560" height="315" src="{{url($get->videolink)}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="img-fluid"></iframe>
+          </figure>
 
-
+          <div class="portfolio-info">
+            <p>{{$get->title}}</p>
+          </div>
+        </div>
+      </div>
+      @endforeach
 
     </div>
 
