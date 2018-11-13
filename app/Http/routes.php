@@ -90,6 +90,7 @@ Route::post('/berita', 'BeritaController@tampil');
 Route::post('/berita/kirim', 'BeritaController@kirim');
 
 Route::get('/data', 'PemantauanController@data');
-Route::get('/databerita', 'BeritaController@loadberita');
-Route::get('/databeritajam', 'BeritaController@loadberitajam');
+Route::get('/databerita/{tgl_berita}', 'BeritaController@loadberita');
+Route::post('/databerita', 'BeritaController@berita');
+Route::get('/databeritajam/{tgl_berita}', 'BeritaController@loadberitajam');
 Route::get('/pemantauan', 'PemantauanController@index');

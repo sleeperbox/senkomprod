@@ -38,7 +38,7 @@ class AdminController extends Controller
     }
     
     public function dashboard(){
-		if(Session::get('login')){
+		if(Session::get('login') == 1){
             if(Session::get('role') == "basic"){
                 return view('user_component.user.dashboard');    
             }else if(Session::get('role') == "admin"){
@@ -62,7 +62,7 @@ class AdminController extends Controller
                     Session::put('id',$data->id);
                     Session::put('username',$data->username);
             		Session::put('role',$data->role);
-                	Session::put('login',TRUE);
+                	Session::put('login',"1");
                     return redirect('admin/dashboard');	
             	}else if($data->role == "basic"){
                     Session::put('nama',$data->nama);
@@ -70,7 +70,7 @@ class AdminController extends Controller
                     Session::put('username',$data->username);
                     Session::put('password',$data->password);
                     Session::put('role',$data->role);
-                	Session::put('login',TRUE);
+                	Session::put('login',"1");
                 	return redirect('user');
             	}else{
                     return back();
@@ -88,7 +88,7 @@ class AdminController extends Controller
         $tgl = date('Y-m-d');
         $tanggal = $tgl;
         $data_berita = Berita::where('tgl',$tanggal)->paginate(5);
-		if(Session::get('login')){
+		if(Session::get('login') == 1){
             if(Session::get('role') == "admin"){
                 return view('user_component.admin.admin', compact('data_berita'));
             }else if(Session::get('role') == "basic"){
@@ -113,7 +113,7 @@ class AdminController extends Controller
         }
     }
     public function admin_user(){
-        if(Session::get('login')){
+        if(Session::get('login') == 1){
             if(Session::get('role') == "admin"){
                 return view('user_component.admin.admin_user');
             }else if(Session::get('role') == "basic"){
@@ -127,7 +127,7 @@ class AdminController extends Controller
     }
     public function datauser(){
         $data_user = User::paginate(10);
-        if(Session::get('login')){
+        if(Session::get('login') == 1){
             if(Session::get('role') == "admin"){
                 return view('user_component.admin.datauser', compact('data_user'));
             }else if(Session::get('role') == "basic"){
@@ -140,7 +140,7 @@ class AdminController extends Controller
         }
     }
     public function tambahuser(){
-        if(Session::get('login')){
+        if(Session::get('login') == 1){
             if(Session::get('role') == "admin"){
                 return view('user_component.admin.tambahuser');
             }else if(Session::get('role') == "basic"){
@@ -198,7 +198,7 @@ class AdminController extends Controller
     }
     public function pemantauan(){
         $data_berita = Berita::orderBy('id', 'DESC')->paginate(5);
-        if(Session::get('login')){
+        if(Session::get('login') == 1){
             if(Session::get('role') == "admin"){
                 return view('user_component.admin.pemantauan', compact('data_berita'));
             }else if(Session::get('role') == "basic"){
